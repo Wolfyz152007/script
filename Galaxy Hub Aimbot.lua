@@ -9,10 +9,38 @@ getgenv().PredictMovement = true -- Predicts if they are moving in fast velocity
 getgenv().PredictionVelocity = 10 -- The speed of the PredictMovement feature 
 ]]--
 
+getgenv().CiazwareUniversalAimbotLoadingTime = tick()
+if CiazwareUniversalAimbotLoaded == true then
+    Notify("Ciazware", "Script Loaded Already", "", 3)
+    return 
+end
+
 local Players, Uis, RService, SGui = game:GetService"Players", game:GetService"UserInputService", game:GetService"RunService", game:GetService"StarterGui";
 local Client, Mouse, Camera, CF, RNew, Vec3, Vec2 = Players.LocalPlayer, Players.LocalPlayer:GetMouse(), workspace.CurrentCamera, CFrame.new, Ray.new, Vector3.new, Vector2.new;
 local Aimlock, MousePressed, CanNotify = true, false, false;
 local AimlockTarget;
+getgenv().CiazwareUniversalAimbotLoaded = true
+
+getgenv().SeparateNotify = function(title, text, icon, time) 
+    SGui:SetCore("SendNotification",{
+        Title = title;
+        Text = text;
+        Icon = "rbxassetid://5793181157";
+        Duration = time;
+    })
+end
+
+getgenv().Notify = function(title, text, icon, time)
+    if CanNotify == true then 
+        if not time or not type(time) == "number" then time = 3 end
+        SGui:SetCore("SendNotification",{
+            Title = title;
+            Text = text;
+            Icon = "rbxassetid://5793181157";
+            Duration = time;
+        }) 
+    end
+end
 
 getgenv().WorldToViewportPoint = function(P)
     return Camera:WorldToViewportPoint(P)
@@ -85,19 +113,20 @@ getgenv().GetNearestTarget = function()
     return nil
 end
 
-getgenv().CheckTeamsChildren = function()
+--[[getgenv().CheckTeamsChildren = function()
     if workspace and workspace:FindFirstChild"Teams" then 
         if getgenv().TeamCheck == true then
             if #workspace.Teams:GetChildren() == 0 then 
-                getgenv().TeamCheck = true
+                getgenv().TeamCheck = false 
                 SeparateNotify("Ciazware", "TeamCheck set to: "..tostring(getgenv().TeamCheck).." because there are no teams!", "", 3)
             end
         end
     end
 end
 CheckTeamsChildren()
+]]--
 
-getgenv().GetNearestTarget = function()
+--[[getgenv().GetNearestTarget = function()
     local T;
     for _, p in next, Players:GetPlayers() do 
         if p ~= Client then 
@@ -125,7 +154,7 @@ getgenv().GetNearestTarget = function()
     if T then 
         return T
     end
-end]]
+end]]--
 
 Uis.InputBegan:Connect(function(Key)
     if not (Uis:GetFocusedTextBox()) then 
@@ -135,11 +164,13 @@ Uis.InputBegan:Connect(function(Key)
                 local Target;Target = GetNearestTarget()
                 if Target ~= nil then 
                     AimlockTarget = Target
+                    Notify("Ciazware", "Aimlock Target: "..tostring(AimlockTarget), "", 3)
                 end
             end)
         end
         if Key.KeyCode == Enum.KeyCode[AimlockToggleKey] then 
             Aimlock = not Aimlock
+            Notify("Ciazware", "Aimlock: "..tostring(Aimlock), "", 3)
         end
     end
 end)
@@ -190,3 +221,5 @@ RService.RenderStepped:Connect(function()
         end
     end
 end)
+
+SeparateNotify("Ciazware", "Universal Aimbot loaded in: "..string.format("%.7f", tostring(tick() - CiazwareUniversalAimbotLoadingTime)), "", 3)
