@@ -14,7 +14,6 @@ local Players, Uis, RService, SGui = game:GetService"Players", game:GetService"U
 local Client, Mouse, Camera, CF, RNew, Vec3, Vec2 = Players.LocalPlayer, Players.LocalPlayer:GetMouse(), workspace.CurrentCamera, CFrame.new, Ray.new, Vector3.new, Vector2.new;
 local Aimlock, MousePressed, CanNotify = true, false, false;
 local AimlockTarget;
-getgenv().CiazwareUniversalAimbotLoaded = false
 
 
 getgenv().WorldToViewportPoint = function(P)
