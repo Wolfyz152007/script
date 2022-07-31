@@ -14,7 +14,7 @@ local Players, Uis, RService, SGui = game:GetService"Players", game:GetService"U
 local Client, Mouse, Camera, CF, RNew, Vec3, Vec2 = Players.LocalPlayer, Players.LocalPlayer:GetMouse(), workspace.CurrentCamera, CFrame.new, Ray.new, Vector3.new, Vector2.new;
 local Aimlock, MousePressed, CanNotify = true, false, false;
 local AimlockTarget;
-getgenv().CiazwareUniversalAimbotLoaded = true
+getgenv().CiazwareUniversalAimbotLoaded = false
 
 
 getgenv().WorldToViewportPoint = function(P)
@@ -93,7 +93,6 @@ end
         if getgenv().TeamCheck == true then
             if #workspace.Teams:GetChildren() == 0 then 
                 getgenv().TeamCheck = false 
-                SeparateNotify("Ciazware", "TeamCheck set to: "..tostring(getgenv().TeamCheck).." because there are no teams!", "", 3)
             end
         end
     end
@@ -139,13 +138,11 @@ Uis.InputBegan:Connect(function(Key)
                 local Target;Target = GetNearestTarget()
                 if Target ~= nil then 
                     AimlockTarget = Target
-                    Notify("Ciazware", "Aimlock Target: "..tostring(AimlockTarget), "", 3)
                 end
             end)
         end
         if Key.KeyCode == Enum.KeyCode[AimlockToggleKey] then 
             Aimlock = not Aimlock
-            Notify("Ciazware", "Aimlock: "..tostring(Aimlock), "", 3)
         end
     end
 end)
