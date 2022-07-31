@@ -193,32 +193,3 @@ RService.RenderStepped:Connect(function()
     end
 end)
 
-
-if currentPlr == nil then
-                   Aimlock = false
-                   print('Locked off because plr nil')
-                   break
-               elseif currentPlr:FindFirstChild("HumanoidRootPart") == nil then
-                   print('Locked off because HumanoidRootPart nil')
-                   Aimlock = false
-                   break
-               elseif currentPlr:FindFirstChild("Humanoid") == nil then
-                   print('Locked off because Humanoid nil')
-                   Aimlock = false
-                   break
-               elseif currentPlr.Humanoid.Health <= 0 then
-                   print('Locked off because enemy plr died')
-                   Aimlock = false
-                   break
-               elseif chr.Humanoid.Health <= 0 then
-                   print('Locked off because your plr died!')
-                   Aimlock = false
-                   break
-               end
-           end
-       else
-           print('no players found!')
-       end
-   end
-end)
-
