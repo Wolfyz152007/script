@@ -85,20 +85,19 @@ getgenv().GetNearestTarget = function()
     return nil
 end
 
---[[getgenv().CheckTeamsChildren = function()
+getgenv().CheckTeamsChildren = function()
     if workspace and workspace:FindFirstChild"Teams" then 
         if getgenv().TeamCheck == true then
             if #workspace.Teams:GetChildren() == 0 then 
-                getgenv().TeamCheck = false 
+                getgenv().TeamCheck = true
                 SeparateNotify("Ciazware", "TeamCheck set to: "..tostring(getgenv().TeamCheck).." because there are no teams!", "", 3)
             end
         end
     end
 end
 CheckTeamsChildren()
-]]--
 
---[[getgenv().GetNearestTarget = function()
+getgenv().GetNearestTarget = function()
     local T;
     for _, p in next, Players:GetPlayers() do 
         if p ~= Client then 
@@ -126,7 +125,7 @@ CheckTeamsChildren()
     if T then 
         return T
     end
-end]]--
+end]]
 
 Uis.InputBegan:Connect(function(Key)
     if not (Uis:GetFocusedTextBox()) then 
