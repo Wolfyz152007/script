@@ -1,5 +1,5 @@
 --[[
-getgenv().AimPart = "HumanoidRootPart" -- For R15 Games: {UpperTorso, LowerTorso, HumanoidRootPart, Head} | For R6 Games: {Head, Torso, HumanoidRootPart}
+getgenv().AimPart = "Head" -- For R15 Games: {UpperTorso, LowerTorso, HumanoidRootPart, Head} | For R6 Games: {Head, Torso, HumanoidRootPart}
 getgenv().AimlockToggleKey = "Y" -- Toggles Aimbot On/Off 
 getgenv().AimRadius = 50 -- How far away from someones character you want to lock on at
 getgenv().ThirdPerson = false -- Locking onto someone in your Third Person POV
@@ -88,7 +88,7 @@ getgenv().GetNearestTarget = function()
     return nil
 end
 
---[[getgenv().CheckTeamsChildren = function()
+getgenv().CheckTeamsChildren = function()
     if workspace and workspace:FindFirstChild"Teams" then 
         if getgenv().TeamCheck == true then
             if #workspace.Teams:GetChildren() == 0 then 
@@ -98,9 +98,8 @@ end
     end
 end
 CheckTeamsChildren()
-]]--
 
---[[getgenv().GetNearestTarget = function()
+getgenv().GetNearestTarget = function()
     local T;
     for _, p in next, Players:GetPlayers() do 
         if p ~= Client then 
@@ -128,7 +127,7 @@ CheckTeamsChildren()
     if T then 
         return T
     end
-end]]--
+end
 
 Uis.InputBegan:Connect(function(Key)
     if not (Uis:GetFocusedTextBox()) then 
